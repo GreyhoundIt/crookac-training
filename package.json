@@ -4,6 +4,7 @@
   "description": "Api for training sessions",
   "main": "index.js",
   "scripts": {
+    "start" : "node index.js",
     "dev": "nodemon server.js"
   },
   "author": "Matthew",
