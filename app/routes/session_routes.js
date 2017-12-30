@@ -85,4 +85,21 @@ module.exports = function (app, db) {
             }
         });
     });
+
+    app.get('/handicap', (req, res) => {
+        let date = require('date-and-time');
+        let now = new Date();
+        now =  date.format(now,'YYYY-MM-DD');
+        const query = { $and : [ {date: { $gte: now} },
+            {description: {$text:{$search: 'handicap'}}}]};
+        const orderby = { date: 1 };
+        db.collection('sessions').find(query).sort(orderby).toArray(function(err, item)  {
+            if (err) {
+                res.send({'error': 'A error has occured'});
+            } else {
+                res.send(item[0]);
+            }
+        });
+    });
+
 };
